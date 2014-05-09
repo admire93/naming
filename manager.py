@@ -7,9 +7,9 @@ from naming.web.app import app
 
 @Manager
 def manager(config=None):
+    assert config
     config = os.path.abspath(config)
     app.config.from_pyfile(config)
-    print app.config
     return app
 
 
@@ -20,7 +20,7 @@ def run(name):
         print '%s - %.2f' % (e, p * 100)
 
 
-manager.add_option('-c', '--config', dest='config', required=True)
+manager.add_option('-c', '--config', dest='config', required=False)
 
 
 def run_manager():

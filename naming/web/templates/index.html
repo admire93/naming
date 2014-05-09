@@ -1,0 +1,45 @@
+{% from 'util.html' import import_bower %}
+{% from 'util.html' import import_static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+    </title>
+    {{ import_bower('css', 'bootstrap', 'css/bootstrap.css') }}
+    {{ import_static('css', 'css/style.css') }}
+  </head>
+
+  <body>
+    <div id="header">
+      <div class="container">
+        <h1>
+        naming
+        </h1>
+        <p>
+         `naming`은 이름으로 심리 테스트를 실행해주는 서비스입니다. 밑에 이름을 적어넣으시고, 심리테스트를 받아보세요!
+        </p>
+      </div>
+    </div>
+    <form action="?" method="GET">
+      <div class="inputs">
+      <input type="text" name="name" placeholder="이름을 써주세요" />
+      <button type="submit">
+        보내기
+      </button>
+      </div>
+    </form>
+
+    {{ import_bower('js', 'jquery', 'jquery.min.js') }}
+    {{ import_bower('js', 'bootstrap', 'js/bootstrap.min.js') }}
+    {{ import_static('js', 'bower_components/d3/d3.min.js') }}
+
+    <script type="text/javascript">
+      var args = [];
+      {% for e, p in status %}
+      args.push(['{{ e }}', '{{ p }}']);
+      {% endfor %}
+    </script>
+  </body>
+</html>
+
+
