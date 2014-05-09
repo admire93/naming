@@ -1,0 +1,17 @@
+{
+  "name": "naming",
+  "version": "0.0.0",
+  "homepage": "https://github.com/admire93/naming",
+  "authors": [
+    "Kang HyoJun <admire9@gmail.com>"
+  ],
+  "license": "GPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
