@@ -5,13 +5,14 @@
   "authors": [
     "Kang HyoJun <admire9@gmail.com>"
   ],
-  "license": "GPL",
+  "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "naming/web/static/bower_components"
   ]
 }

@@ -39,3 +39,5 @@ nosetests.xml
 
 # personal virtualenvwrapper configuration file
 .virtualenvwrapper
+
+naming/web/static/bower_components/*
