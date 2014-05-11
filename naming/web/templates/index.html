@@ -36,8 +36,23 @@
     <script type="text/javascript">
       var args = [];
       {% for e, p in status %}
-      args.push(['{{ e }}', '{{ p }}']);
+        args.push(['{{ e }}', {{ '%.2f' % p }}]);
       {% endfor %}
+      var svg = d3.select("body").append("svg")
+                  .attr("width", 500)
+                  .attr("height", 500)
+                  .attr("class", "bubble");
+      var node = svg.selectAll(".node")
+                    .data(args)
+                    .enter().append("g")
+                    .attr("class", "node");
+
+      node.append("circle")
+          .attr("r", function(d) { return d[1] * 100 + 'px'; })
+          .style("fill", function(d) { return '#C0FFEE' });
+
+      node.append("title")
+          .text(function(d) { d[0] });
     </script>
   </body>
 </html>

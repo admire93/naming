@@ -9,8 +9,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def index():
     name = request.args.get('name')
-    print name
-    status = None
+    status = []
     if name:
         status = parse_name(name.encode('utf-8').encode('base64'))
     return render_template('index.html', status=status)
