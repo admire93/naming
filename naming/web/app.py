@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from time import ctime
+
 from flask import Flask, render_template, request
 from naming import parse_name
 
@@ -11,5 +13,7 @@ def index():
     name = request.args.get('name')
     status = []
     if name:
-        status = parse_name(name.encode('utf-8').encode('base64'))
+        n = name.encode('utf-8')
+        r = (n + ctime()).encode('base64')
+        status = parse_name(n)
     return render_template('index.html', status=status)
