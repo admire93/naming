@@ -45,14 +45,17 @@
       var node = svg.selectAll(".node")
                     .data(args)
                     .enter().append("g")
-                    .attr("class", "node");
+                    .attr("class", "node")
+                    .attr("transform", function(d) {
+                        return "translate(150, 150)";
+                    });
 
       node.append("circle")
           .attr("r", function(d) { return d[1] * 100 + 'px'; })
           .style("fill", function(d) { return '#C0FFEE' });
 
-      node.append("title")
-          .text(function(d) { d[0] });
+      node.append("text")
+          .text(function(d) { return d[0]; });
     </script>
   </body>
 </html>
