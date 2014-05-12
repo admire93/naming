@@ -22,7 +22,15 @@ def test_pick_probability():
     encoded = '0e8a4ba0c9e58eada99adae85e9c0ab4a8e0'
     ev = pick_env(encoded)
     prob = pick_probability(encoded, len(ev))
-    exp = map(lambda x: int(x, 16), ['e', '8a', '4ba', '0c9e', '58ead'])
+    expected_prob = [
+        '0e8a4ba',
+        '0c9e58e',
+        'ada99ad',
+        'ae85e9c',
+        '0ab4a8e',
+        '0',
+    ]
+    exp = map(lambda x: int(x, 16), expected_prob)
     a = float(sum(exp))
     exp = map(lambda x: x / a, exp)
     for p, e in zip(prob, exp):

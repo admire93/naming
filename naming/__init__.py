@@ -25,14 +25,11 @@ def pick_env(encoded_name):
 
 
 def pick_probability(enc, l):
+    l_enc = len(enc)
+    i = l_enc // l
     r = []
-    for x in range(1, l + 1):
-        c = list(set(enc[:x]))
-        if len(c) == 1 and c[0] == '0':
-            return pick_probability(enc[x:], l)
-        else:
-            r.append(int(enc[:x], 16))
-            enc = enc[x:]
+    for x in xrange(0, l_enc, i):
+        r.append(int(enc[x:x + i], 16))
     a = float(sum(r))
     return map(lambda x: x / a, r)
 
@@ -41,4 +38,6 @@ def parse_name(name):
     encoded_name = pack_name(name.encode('hex'))
     user_env = pick_env(encoded_name)
     prob = pick_probability(encoded_name, len(user_env))
-    return zip(user_env, prob)
+    for env, p in zip(user_env, prob):
+        if p != 0:
+            yield env, p
