@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from time import ctime
+from datetime import datetime
 
 from flask import Flask, render_template, request
 from naming import parse_name
@@ -14,6 +14,7 @@ def index():
     status = []
     if name:
         n = name.encode('utf-8')
-        r = (n + ctime()).encode('base64')
+        date = datetime.now().strftime('%D')
+        r = (n + date).encode('base64')
         status = parse_name(n)
     return render_template('index.html', status=status)
