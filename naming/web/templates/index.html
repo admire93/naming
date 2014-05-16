@@ -29,60 +29,22 @@
       </div>
     </form>
 
+    <div id="result">
+    </div>
+
     {{ import_bower('js', 'jquery', 'jquery.min.js') }}
     {{ import_bower('js', 'bootstrap', 'js/bootstrap.min.js') }}
     {{ import_static('js', 'bower_components/d3/d3.min.js') }}
+    {{ import_static('js', 'js/chart.js') }}
 
     <script type="text/javascript">
       var args = [];
 
-      var width = 500;
-
-      var radius = width / 2;
       {% for e, p in status %}
       args.push({'feel': '{{ e }}', 'prob': {{ '%.2f' % p }}});
       {% endfor %}
 
-      var color = function(d) {
-        var c = ["3C855C", "FFEC6C", "#FFC343", "#FFA14A", "#E85649"];
-        var idx = 0;
-        for(i in args) {
-          if(d.data['feel'] == args[i]['feel']) {
-            idx = i;
-          }
-        }
-        return c[idx % c.length];
-      }
-
-      var pie = d3.layout.pie()
-          .sort(null)
-          .value(function(d) { return d['prob']; });
-
-      var arc = d3.svg.arc()
-          .outerRadius(radius - 10)
-          .innerRadius(0);
-
-      var svg = d3.select('body').append('svg')
-          .attr('width', width)
-          .attr('height', width)
-        .append('g')
-          .attr('transform', 'translate(' + width / 2 + ',' + width / 2 + ')');
-
-
-      var g = svg.selectAll(".arc")
-          .data(pie(args))
-        .enter().append("g")
-          .attr("class", "arc");
-
-       g.append("path")
-       .attr("d", arc)
-       .style("fill", function(d) { return color(d); });
-
-       g.append("text")
-       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-       .attr("dy", ".35em")
-       .style("text-anchor", "middle")
-       .text(function(d) { return d.data['feel']; });
+      draw_pie_feel(args);
     </script>
   </body>
 </html>
