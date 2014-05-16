@@ -35,27 +35,54 @@
 
     <script type="text/javascript">
       var args = [];
+
+      var width = 500;
+
+      var radius = width / 2;
       {% for e, p in status %}
-        args.push(['{{ e }}', {{ '%.2f' % p }}]);
+      args.push({'feel': '{{ e }}', 'prob': {{ '%.2f' % p }}});
       {% endfor %}
-      var svg = d3.select("body").append("svg")
-                  .attr("width", 500)
-                  .attr("height", 500)
-                  .attr("class", "bubble");
-      var node = svg.selectAll(".node")
-                    .data(args)
-                    .enter().append("g")
-                    .attr("class", "node")
-                    .attr("transform", function(d) {
-                        return "translate(150, 150)";
-                    });
 
-      node.append("circle")
-          .attr("r", function(d) { return d[1] * 100 + 'px'; })
-          .style("fill", function(d) { return '#C0FFEE' });
+      var color = function(d) {
+        var c = ["3C855C", "FFEC6C", "#FFC343", "#FFA14A", "#E85649"];
+        var idx = 0;
+        for(i in args) {
+          if(d.data['feel'] == args[i]['feel']) {
+            idx = i;
+          }
+        }
+        return c[idx % c.length];
+      }
 
-      node.append("text")
-          .text(function(d) { return d[0]; });
+      var pie = d3.layout.pie()
+          .sort(null)
+          .value(function(d) { return d['prob']; });
+
+      var arc = d3.svg.arc()
+          .outerRadius(radius - 10)
+          .innerRadius(0);
+
+      var svg = d3.select('body').append('svg')
+          .attr('width', width)
+          .attr('height', width)
+        .append('g')
+          .attr('transform', 'translate(' + width / 2 + ',' + width / 2 + ')');
+
+
+      var g = svg.selectAll(".arc")
+          .data(pie(args))
+        .enter().append("g")
+          .attr("class", "arc");
+
+       g.append("path")
+       .attr("d", arc)
+       .style("fill", function(d) { return color(d); });
+
+       g.append("text")
+       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+       .attr("dy", ".35em")
+       .style("text-anchor", "middle")
+       .text(function(d) { return d.data['feel']; });
     </script>
   </body>
 </html>
