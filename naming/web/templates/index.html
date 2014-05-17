@@ -35,7 +35,10 @@
     {{ import_bower('js', 'jquery', 'jquery.min.js') }}
     {{ import_bower('js', 'bootstrap', 'js/bootstrap.min.js') }}
     {{ import_static('js', 'bower_components/d3/d3.min.js') }}
+    {{ import_static('js', 'js/util.js') }}
     {{ import_static('js', 'js/chart.js') }}
+    {{ import_static('js', 'js/naming.js') }}
+
 
     <script type="text/javascript">
       if(!Array.prototype.forEach) {
@@ -54,8 +57,8 @@
 
         keyValuePairs.forEach(function(keyValuePair) {
             keyValuePair = keyValuePair.split('=');
-            result[keyValuePair[0]] = keyValuePair[1] || '';
-            });
+            result[keyValuePair[0]] = decodeURIComponent(keyValuePair[1]) || '';
+        });
 
         return result;
       }
@@ -72,7 +75,7 @@
         $('#result').show();
 
         $('.inputs input[type=text]')
-        .attr('value', decodeURIComponent(query['name']));
+        .attr('value', query['name']);
       }
     </script>
   </body>
