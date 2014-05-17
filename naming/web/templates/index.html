@@ -38,13 +38,42 @@
     {{ import_static('js', 'js/chart.js') }}
 
     <script type="text/javascript">
+      if(!Array.prototype.forEach) {
+        Array.prototype.forEach = function(fn, scope) {
+          for(var i = 0, len = this.length; i < len; ++i) {
+            fn.call(scope, this[i], i, this);
+          }
+        }
+      }
+
+      function queryObj() {
+        if(location.search == "") return {};
+
+        var result = {},
+            keyValuePairs = location.search.slice(1).split('&');
+
+        keyValuePairs.forEach(function(keyValuePair) {
+            keyValuePair = keyValuePair.split('=');
+            result[keyValuePair[0]] = keyValuePair[1] || '';
+            });
+
+        return result;
+      }
+
       var args = [];
 
       {% for e, p in status %}
       args.push({'feel': '{{ e }}', 'prob': {{ '%.2f' % p }}});
       {% endfor %}
 
-      draw_pie_feel(args);
+      var query = queryObj();
+      if(!$.isEmptyObject(query) && query.hasOwnProperty('name')) {
+        draw_pie_feel(args);
+        $('#result').show();
+
+        $('.inputs input[type=text]')
+        .attr('value', decodeURIComponent(query['name']));
+      }
     </script>
   </body>
 </html>
