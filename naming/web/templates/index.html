@@ -63,13 +63,10 @@
         return result;
       }
 
-      var args = [];
-
-      {% for e, p in status %}
-      args.push({'feel': '{{ e }}', 'prob': {{ '%.2f' % p }}});
-      {% endfor %}
+      var args = namingify('강효준');
 
       var query = queryObj();
+
       if(!$.isEmptyObject(query) && query.hasOwnProperty('name')) {
         draw_pie_feel(args);
         $('#result').show();
