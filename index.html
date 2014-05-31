@@ -67,11 +67,11 @@
         return result;
       }
 
-      var args = namingify('강효준');
 
       var query = queryObj();
 
       if(!$.isEmptyObject(query) && query.hasOwnProperty('name')) {
+        var args = namingify(query['name']);
         draw_pie_feel(args);
         $('#result').show();
 

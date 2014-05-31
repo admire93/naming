@@ -6,12 +6,8 @@ var namingify = function(name) {
   var ENV = ['용기', '교만', '시기', '분노', '나태', '탐욕', '식탐', '색욕',
              '사랑', '증오', '졸림', '기쁨', '환호', '우울', '빡침' ],
       hexed = name.toHex().split(''),
-      n = [],
+      n = hexed,
       my_env = [];
-  for(var i=0; i < hexed.length; i++) {
-    n.push(hexed[i]);
-    n.push(hexed[(hexed.length - 1) - i]);
-  }
 
   var nl = 5 - h2d(n[0]) % 3,
       l = Math.floor(n.length / nl),
@@ -31,11 +27,15 @@ var namingify = function(name) {
   });
 
   for(var i=0; i < nl; i++) {
-    my_env.push(ENV[h2d(n[i])]);
+    console.log(n[i]);
+    var env = ENV[h2d(n[i])];
+    if(my_env.indexOf(env) === -1) {
+      my_env.push(env);
+    }
   }
 
   var result = [];
-  for(var i=0; i < nl; i++) {
+  for(var i=0; i < my_env.length; i++) {
     result.push({
       'feel': my_env[i],
       'prob': prob[i]
