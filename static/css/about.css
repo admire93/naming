@@ -1,7 +1,8 @@
 * { color: #222; }
 
 .card {
-  width: 100%;
+  width: 50%;
+  float: left;
 }
 
 .card .profile {
@@ -30,7 +31,7 @@
 
 .talk {
   margin: 40px auto;
-  width: 800px;
+  width: 500px;
   line-height: 40px;
 }
 
