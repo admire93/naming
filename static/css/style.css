@@ -1,4 +1,5 @@
 *, html, body { margin: 0; padding: 0; }
+
 #header {
   margin: 0; padding: 60px 0;
   background-color: #B64926;
@@ -45,3 +46,46 @@ div#result {
 }
 
 div#result svg { margin: 100px 0 0 250px; }
+
+#nav {
+  width: 100%; height: 50px; list-style: none;
+}
+
+#nav li {
+  float: left;
+  margin-left: 50px;
+  padding-top: 10px;
+  font-size: 20px;
+  border-top: solid 5px #fff;
+}
+
+#nav li.selected {
+  border-top: solid 5px #B64926;
+}
+
+#nav li a {
+  color: #222;
+  text-decoration: none;
+}
+
+#nav li:hover {
+  border-top: solid 5px #FFB03B;
+}
+
+.description {
+  margin-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.description .article {
+  margin-bottom: 30px;
+}
+
+.article h2 {
+  margin-bottom: 20px;
+}
+
+.article p {
+  line-height: 40px;
+}
